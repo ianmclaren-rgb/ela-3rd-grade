@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Secret Field Treasure Hunt - Grade 3 ELA Quest</title>
+  <style>
+    :root {
+      --primary: #85586F;
+      --accent: #DFBB9D;
+      --bg: #F8F5F2;
+      --gold: #FFD700;
+      --card-bg: #FFFFFF;
+      --success: #4CAF50;
+      --error: #F44336;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: var(--bg);
+      color: #333;
+    }
+
+    header {
+      background-color: #6E4C41;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .coin-counter {
+      background-color: #FFC107;
+      color: #333;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: calc(100vh - 70px);
+    }
+
+    /* Passage Panel */
+    .passage-panel {
+      width: 45%;
+      padding: 25px;
+      overflow-y: auto;
+      background-color: #FFFDF9;
+      border-right: 2px solid #E0D9D0;
+    }
+
+    .passage-panel h2 {
+      color: #5D4037;
+    }
+
+    .passage-text {
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Quest Panel */
+    .quest-panel {
+      width: 55%;
+      padding: 25px;
+      overflow-y: auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+      border-left: 6px solid var(--primary);
+    }
+
+    .option-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 15px;
+      margin: 8px 0;
+      border: 2px solid #E0E0E0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      background-color: #F0EAE1;
+      border-color: #BCAAA4;
+    }
+
+    .option-btn.correct {
+      background-color: #E8F5E9;
+      border-color: var(--success);
+      color: #2E7D32;
+      font-weight: bold;
+    }
+
+    .option-btn.incorrect {
+      background-color: #FFEBEE;
+      border-color: var(--error);
+      color: #C62828;
+    }
+
+    .feedback {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .next-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #6E4C41;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .passage-panel, .quest-panel {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🗺️ The Secret Field Treasure Hunt</h1>
+    <div class="coin-counter">🪙 Gold Coins: <span id="coin-count">0</span> / 8</div>
+  </header>
+
+  <div class="container">
+    <!-- Left: Story Passage -->
+    <div class="passage-panel">
+      <h2>📖 Passage: "Treasure in the Field"</h2>
+      <p><i>by Marilyn Bolchunos</i></p>
+      <div class="passage-text">
+        <p>Once there was a man who lived with his two young sons on a farm in Vietnam. Since the man had to tend the field, the boys took care of the house. That is, they were supposed to take care of the house. Often the father returned home to find that nothing had been done—he even had to cook dinner.</p>
+        <p>"What have you been doing all day, Ta?" he would ask his older son.</p>
+        <p>"Studying, Father, and thinking," Ta would reply.</p>
+        <p>"And what have you been doing, Hai, my young son?" the father would ask.</p>
+        <p>"Watching the house for you," Hai would answer.</p>
+        <p>A neighbor asked the old man, "Are your sons helping you?"</p>
+        <p>"Oh, they would," the father answered, "but they are young."</p>
+        <p>Some years later, the neighbor asked, "Aren't your sons helping you in the field?"</p>
+        <p>"Oh, they would," the father replied again, "but they are still young. I will let them enjoy life now. They will help me later on."</p>
+        <p>As the years went by, it became clear even to their father that the boys were lazy. Though they sometimes tended the field with him, they always made excuses to go home early.</p>
+        <p>Finally the father grew too old to work, and he took to his bed. The sons were sad, for they not only depended on their father, but they also loved him.</p>
+        <p>One day the old man called Ta and Hai to his side and said weakly, "I have a secret to tell you, my sons. Bend close."</p>
+        <p>Hai and Ta leaned over to hear the secret.</p>
+        <p>"A while ago," the old man said, "we learned that there is treasure buried in the field. It's still there, but you must dig for it."</p>
+        <p>The sons' eyes widened.</p>
+        <p>"Treasure in the field?" Ta said. "Where?" asked Hai.</p>
+        <p>"Dig for it, and you will find it," said their father. "But promise me that you will share it equally."</p>
+        <p>The sons promised and hurried out to begin. Day after day they dug. Their neighbor was astonished to see how long and hard the young men worked. As for Ta and Hai, they felt stronger and better than ever before.</p>
+        <p>At last, the entire field had been dug, but no treasure had been found. The brothers moped around with their heads down.</p>
+        <p>Finally an idea came to Ta. "The land is ready for planting," he said to his brother. "And our rice is almost gone. You take one half of the field, and I'll take the other. We'll tend it just as Father did."</p>
+        <p>The days passed and the seedlings grew. In due time, the field gave an abundant harvest. There was rice to eat and rice to sell. When the sons took the rice to the marketplace, it brought a good price.</p>
+        <p>Excited, Ta and Hai ran back to the house and approached their father's bedside. They dropped coins into the old man's hands.</p>
+        <p>"Look, Father," said Hai. "We have sold rice and brought you gold!"</p>
+        <p>"Yes," said Ta. "Just as you said, the treasure was in the field."</p>
+        <p>The old man smiled. They had learned his secret.</p>
+      </div>
+    </div>
+
+    <!-- Right: Interactive Quest -->
+    <div class="quest-panel">
+      <div id="quest-card" class="card">
+        <h3 id="level-title">Level 1: The Word Detective</h3>
+        <p id="question-text">Loading question...</p>
+        <div id="options-container"></div>
+        <div id="feedback" class="feedback"></div>
+        <button id="next-btn" class="next-btn" onclick="nextQuestion()">Next Challenge ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questData = [
+      {
+        level: "Level 1: Context Clues 🔍",
+        question: "Re-read Paragraph 18. What does the word <b>astonished</b> most likely mean?<br><i>'Their neighbor was astonished to see how long and hard the young men worked.'</i>",
+        options: ["A) Disappointed", "B) Discovered", "C) Satisfied", "D) Surprised"],
+        correct: 3,
+        explanation: "🎉 Correct! The neighbor was surprised because the boys used to be very lazy!"
+      },
+      {
+        level: "Level 1: Context Clues 🔍",
+        question: "What does the phrase <i>'even to their father'</i> tell you about the story?",
+        options: [
+          "A) It took the father a long time to teach the boys a new kind of work.",
+          "B) It took the father longer than others to understand his sons were lazy.",
+          "C) The father knew all along that his boys did not like to work.",
+          "D) The father knew many other people who could help on the farm."
+        ],
+        correct: 1,
+        explanation: "🎉 Correct! Parents love their kids, so it often takes them longer to see their flaws!"
+      },
+      {
+        level: "Level 2: Evidence Digger ⛏️",
+        question: "Which detail best explains why the father must stop working in the field?",
+        options: [
+          "A) The father needs to return home to cook dinner.",
+          "B) The father asks the neighbor to do the work.",
+          "C) The father's sons depend on him to stay home.",
+          "D) The father's age makes it too difficult to do farm work any longer."
+        ],
+        correct: 3,
+        explanation: "🎉 Correct! Paragraph 11 states that the father grew too old to work."
+      },
+      {
+        level: "Level 2: Evidence Digger ⛏️",
+        question: "Which detail best shows that the old man's sons are lazy?",
+        options: [
+          "A) Since the man had to tend the field, the boys took care of the house.",
+          "B) 'Oh, they would,' the father replied again, 'but they are still young.'",
+          "C) Though they sometimes tended the field with him, they always made excuses to go home early.",
+          "D) The sons were sad, for they not only depended on their father, but they also loved him."
+        ],
+        correct: 2,
+        explanation: "🎉 Correct! Making excuses to go home early proves they avoided hard work."
+      },
+      {
+        level: "Level 3: Author's Blueprint 🏗️",
+        question: "Which of these best describes why the author used dialogue (talking) in the passage?",
+        options: [
+          "A) To describe how the sons and the old man work together.",
+          "B) To describe how the old man shares his secret with his sons.",
+          "C) To explain why the characters behave the way they do.",
+          "D) To explain why the neighbor was interested in the father's fields."
+        ],
+        correct: 2,
+        explanation: "🎉 Correct! The dialogue shows their thoughts, excuses, and true character!"
+      },
+      {
+        level: "Level 4: Master Secret 🏆",
+        question: "Which sentence is most likely true about BOTH sons in the passage?",
+        options: [
+          "A) Both wish that they will always live on the farm.",
+          "B) Both wish to have more treasure than anyone else.",
+          "C) Both learn that treasure can have more than one meaning.",
+          "D) Both want to teach their father how to grow rice in the field."
+        ],
+        correct: 2,
+        explanation: "🏆 TREASURE UNLOCKED! Both sons learned that hard work and its rewards are a real treasure!"
+      }
+    ];
+
+    let currentQ = 0;
+    let coins = 0;
+    let answered = false;
+
+    function loadQuestion() {
+      answered = false;
+      const data = questData[currentQ];
+      document.getElementById('level-title').innerText = data.level;
+      document.getElementById('question-text').innerHTML = data.question;
+      
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+      
+      data.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optionsContainer.appendChild(btn);
+      });
+
+      const feedback = document.getElementById('feedback');
+      feedback.className = 'feedback';
+      feedback.style.display = 'none';
+      document.getElementById('next-btn').style.display = 'none';
+    }
+
+    function checkAnswer(selectedIndex, btn) {
+      if (answered) return;
+      answered = true;
+
+      const data = questData[currentQ];
+      const buttons = document.querySelectorAll('.option-btn');
+      const feedback = document.getElementById('feedback');
+
+      if (selectedIndex === data.correct) {
+        btn.classList.add('correct');
+        coins += 1;
+        document.getElementById('coin-count').innerText = coins;
+        feedback.style.backgroundColor = '#E8F5E9';
+        feedback.style.color = '#2E7D32';
+        feedback.innerHTML = data.explanation;
+      } else {
+        btn.classList.add('incorrect');
+        buttons[data.correct].classList.add('correct');
+        feedback.style.backgroundColor = '#FFEBEE';
+        feedback.style.color = '#C62828';
+        feedback.innerHTML = "❌ Not quite! " + data.explanation;
+      }
+
+      feedback.style.display = 'block';
+      document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ < questData.length) {
+        loadQuestion();
+      } else {
+        document.getElementById('quest-card').innerHTML = `
+          <h2>🎉 QUEST COMPLETED!</h2>
+          <p>You collected <b>${coins} / ${questData.length} Gold Coins</b>!</p>
+          <p>You have mastered 3rd Grade ELA text evidence, vocabulary, and character analysis!</p>
+          <button class="next-btn" style="display:block;" onclick="location.reload()">Play Again 🔄</button>
+        `;
+      }
+    }
+
+    // Initialize
+    loadQuestion();
+  </script>
+</body>
+</html>
